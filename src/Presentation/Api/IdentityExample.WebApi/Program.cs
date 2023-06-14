@@ -1,4 +1,10 @@
+using IdentityExample.Application;
+using IdentityExample.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationServices();
+builder.Services.AddPersistenceServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
