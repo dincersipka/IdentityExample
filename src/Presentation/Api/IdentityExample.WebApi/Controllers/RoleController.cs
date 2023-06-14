@@ -8,7 +8,7 @@ namespace IdentityExample.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RoleController : ControllerBase
     {
         private readonly IMediator _Mediator;

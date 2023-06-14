@@ -1,10 +1,11 @@
 using IdentityExample.Application;
-using IdentityExample.Persistence;
 using IdentityExample.Infrastructure;
+using IdentityExample.Persistence;
+using IdentityExample.WebApi.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
-using IdentityExample.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,29 @@ builder.Services.AddPersistenceServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(s => 
+{
+    s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
+    {
+        Description = "JWT Authorization Header Using The Bearer Scheme",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type= SecuritySchemeType.ApiKey,
+    });
+    s.AddSecurityRequirement(new OpenApiSecurityRequirement 
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                                {
+                                    Id="Bearer",
+                                    Type = ReferenceType.SecurityScheme
+                                }
+            }, new List<string>() 
+        }
+    });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
