@@ -5,7 +5,7 @@
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string CreatedBy { get; set; }
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
 
         public string? UpdatedBy { get; set; }
         public DateTime UpdateDate { get; set; }
