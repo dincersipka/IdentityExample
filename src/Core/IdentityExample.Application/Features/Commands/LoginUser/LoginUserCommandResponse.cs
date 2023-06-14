@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IdentityExample.Application.DTOs;
 
 namespace IdentityExample.Application.Features.Commands.LoginUser
 {
     public class LoginUserCommandResponse
     {
+        public Token Token { get; set; }
     }
 }

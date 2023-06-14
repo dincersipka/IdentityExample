@@ -1,4 +1,5 @@
-﻿using IdentityExample.Application.Features.Commands.LoginUser;
+﻿using IdentityExample.Application.Abstractions.Wrappers;
+using IdentityExample.Application.Features.Commands.LoginUser;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace IdentityExample.WebApi.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody] LoginUserCommandRequest Request)
         {
-            LoginUserCommandResponse Response = await _Mediator.Send(Request);
+            IServiceResponse Response = await _Mediator.Send(Request);
 
             return Ok(Response);
         }
