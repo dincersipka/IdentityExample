@@ -7,5 +7,7 @@ namespace IdentityExample.Application.Abstractions.Context
     {
         DbSet<User> Users { get; }
         DbSet<Role> Roles { get; }
+
+        Task<int> SaveChangesAsync(CancellationToken Token);
     }
 }
